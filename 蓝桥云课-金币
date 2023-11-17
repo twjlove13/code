@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+  // 请在此输入您的代码
+  int K, sum = 0, d = 0;
+  scanf("%d", &K);
+  while (K > 0)
+  {
+    //发放金币的天数
+    d++;
+    //每次发放金币数
+    sum += d * d;
+    K -= d;
+  }
+  printf("%d", sum - d * (-K));
+  return 0;
+}
