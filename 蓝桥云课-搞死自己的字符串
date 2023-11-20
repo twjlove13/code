@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void quicksort(int num[], int left, int right)
+{
+  if(left < right)
+  {
+    int pivot = num[left], i = left, j = right;
+    while(left < right)
+    { 
+      while(pivot <= num[right] && left < right) right--; 
+      if(left < right) num[left] = num[right];
+      while(pivot >= num[left] && left < right) left++;
+      if(left < right) num[right] = num[left];
+    }
+    num[left] = pivot;
+    quicksort(num, i, left - 1);
+    quicksort(num, left + 1, j);
+  }
+}
+
+void twj(int count, int haoma, int book[], int i)
+{
+  int j;
+  int s = 1;
+  for(j = 0; j < count; j++)
+  {
+    s *= 10;
+  }
+  int p = 0, num[1000] = { 0 };
+  for(j = 0; j < i; j++)
+  {
+    if(haoma == book[j] % s)
+    {
+      num[p] = book[j];
+      p++;
+    }
+  }
+  if(num[0] != 0)
+  {
+    quicksort(num, 0, p);
+    for(i = 0; i < 1000; i++)
+    {
+      if(num[i] != 0)
+      {
+        printf("%d\n", num[i]);
+        break;
+      }
+    }
+  }
+  else
+  {
+    printf("-1\n");
+  }
+}
+
+int main(int argc, char *argv[])
+{
+  // 请在此输入您的代码
+  int n, q;
+  int book[100005];
+  scanf("%d %d", &n, &q);
+  int i = 0;
+  while (n--)
+  {
+    scanf("%d", &book[i]);
+    i++;
+  }
+  int count, haoma;
+  while (q--)
+  {
+    scanf("%d %d", &count, &haoma);
+    twj(count, haoma, book, i);
+  }
+  return 0;
+}
