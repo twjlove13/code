@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<math.h>
+
+#define N 10001
+int Natures[N];           //初始时存放2~N-1之内的自然数
+int Prime[N], count = 0;  //Prime：存储2~N-1之内的素数， count：2~N-1范围内的素数个数
+
+void PrimeTable()
+{
+	int i, j, p;
+	for(i = 0; i < N; i++) Natures[i] = i;
+	for(p = 2; p < sqrt(N); p++)
+	{
+		if(Natures[p])
+		{
+			for(j = 2 * p; j < N; j += p)  //初始值为2*p,每次j递增p
+			{
+				Natures[j] = 0;           //删除j的倍数
+			}
+		}
+	}
+	for(i = 2, j = 0; i < N; i++)
+	{
+		if(Natures[i]) 
+		{
+			Prime[j] = Natures[i];
+			j++;
+		}
+ 	}
+ 	count = j;
+}
+
+int main()
+{
+	PrimeTable();
+	printf("%d\n", count);
+	return 0;
+}
